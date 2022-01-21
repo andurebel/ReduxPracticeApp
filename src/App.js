@@ -44,7 +44,7 @@ function App() {
           onClick={() => {
             dispatch(
               addUser({
-                id: (state) => state.users.length + 1,
+                id: userList[userList.length - 1].id + 1,
                 name,
                 username,
                 email,
@@ -65,6 +65,7 @@ function App() {
             <UserCard
               name={user.name}
               key={user.id}
+              id={user.id}
               email={user.email}
               username={user.username}
             />
