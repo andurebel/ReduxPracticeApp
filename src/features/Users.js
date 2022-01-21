@@ -70,3 +70,5 @@ export const userSlice = createSlice({
     addUser: (state, action) => {},
   },
 });
+
+export default userSlice.reducer;
