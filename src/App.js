@@ -12,6 +12,7 @@ function App() {
   const [email, setEmail] = useState("");
   return (
     <div className="container-md my-5  text-center ">
+      <h1 className="text-2xl my-4">Enter user details:</h1>
       <form
         className="flex flex-col w-3/4 md:max-w-md mx-auto"
         onSubmit={(event) => event.preventDefault()}
@@ -59,7 +60,9 @@ function App() {
         </button>
       </form>
       <div>
-        <h1 className="text-2xl text-center my-10">User List below</h1>
+        <h1 className="text-2xl text-center my-10 font-bold">
+          Current users list
+        </h1>
         <section className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 border p-5">
           {userList.map((user) => (
             <UserCard

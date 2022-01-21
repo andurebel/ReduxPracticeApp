@@ -2,6 +2,8 @@ import React from "react";
 import { deleteUser, updateUsername } from "../features/Users";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { AiOutlineDelete } from "react-icons/ai";
+import { GrUpdate } from "react-icons/gr";
 
 const UserCard = ({ id, name, username, email }) => {
   const dispatch = useDispatch();
@@ -18,25 +20,32 @@ const UserCard = ({ id, name, username, email }) => {
         placeholder="Enter new username"
         onChange={(event) => setNewUsername(event.target.value)}
       />
-      <div>
+      <div className="flex  justify-center items-center py-4">
         <button
           onClick={() => {
+            if (!newUsername) return;
             dispatch(
               updateUsername({ id, username: newUsername }),
               setNewUsername(""),
             );
           }}
-          className="border border-yellow-500 mx-2 rounded p-2 hover:bg-yellow-500 hover:text-white hover:shadow-xl"
+          className="flex items-center justify-center border border-yellow-500 mx-2 rounded p-2 hover:bg-yellow-500 hover:text-white hover:shadow-xl"
         >
           Update user
+          <div className="mx-4 hover:animate-bounce">
+            <GrUpdate />
+          </div>
         </button>
         <button
           onClick={() => {
             dispatch(deleteUser({ id }));
           }}
-          className="border border-red-500 mx-2 rounded p-2 hover:bg-red-500 hover:text-white hover:shadow-xl "
+          className="flex items-center justify-center border border-red-500 mx-2 rounded p-2 hover:bg-red-500 hover:text-white hover:shadow-xl "
         >
           Delete user
+          <div className="mx-4 hover:animate-bounce ">
+            <AiOutlineDelete />
+          </div>
         </button>
       </div>
     </article>
