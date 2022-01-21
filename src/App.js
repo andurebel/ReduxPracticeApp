@@ -1,25 +1,63 @@
-import Button from "./components/Button";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addUser } from "./features/Users";
 import UserCard from "./components/UserCard";
+import { useState } from "react";
 
 function App() {
   const userList = useSelector((state) => state.users.value);
+  const dispatch = useDispatch();
 
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   return (
-    <div className="container m-5  text-center ">
-      <div>
+    <div className="container-md my-5  text-center ">
+      <form
+        className="flex flex-col w-3/4 md:max-w-md mx-auto"
+        onSubmit={(event) => event.preventDefault()}
+      >
         <input
+          value={name}
+          onChange={(event) => setName(event.target.value)}
           type="text"
-          className="border border-gray-200"
+          className="border border-gray-200 p-2 my-2 rounded "
           placeholder="Name"
         />
         <input
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
           type="text"
-          className="border border-gray-200"
+          className="border border-gray-200 p-2 my-2 rounded "
           placeholder="Username"
         />
-        <Button name="Add User" color="blue" />
-      </div>
+        <input
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          type="email"
+          className="border border-gray-200 p-2 my-2 rounded "
+          placeholder="Email"
+        />
+        <button
+          className="bg-blue-500 p-2 rounded shadow text-white hover:bg-blue-400 w-1/4 mx-auto mt-8"
+          disabled={!name || !username || !email}
+          type="submit"
+          onClick={() => {
+            dispatch(
+              addUser({
+                id: (state) => state.users.length + 1,
+                name,
+                username,
+                email,
+              }),
+              setName(""),
+              setUsername(""),
+              setEmail(""),
+            );
+          }}
+        >
+          Add user
+        </button>
+      </form>
       <div>
         <h1 className="text-2xl text-center my-10">User List below</h1>
         <section className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 border p-5">
